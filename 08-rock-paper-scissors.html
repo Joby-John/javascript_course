@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rock paper Scissors</title>
+</head>
+<body>
+    <p>Rock paper Scissors</p>
+
+    <button onclick="
+        getChoice(0);
+    ">Rock</button>
+
+    <button onclick="
+        getChoice(1);
+    ">Paper</button>
+
+    <button onclick="
+        getChoice(2);
+    ">Scissors</button>
+
+    <button onclick="
+        score.wins = 0;
+        score.loses = 0;
+        score.ties = 0;
+        localStorage.removeItem('score');
+
+        alert('Score Cleared');
+    ">
+        Reset Score
+    </button>
+
+    <script>
+        let score = JSON.parse(localStorage.getItem('score')) ||
+        {
+            wins:0, 
+            loses:0,
+            ties:0
+        };
+
+        /*if(!score){
+            score = {
+                wins:0, 
+                loses:0,
+                ties:0
+            }
+        }; */
+
+       
+        function getChoice(userChoice){
+         
+            const cSelection = Math.random();
+            let compMove = -1
+            
+            if(cSelection >= 0 && cSelection < 1/3){
+                compMove = 0;
+                alert('Computer chose rock');
+            }
+            else if(cSelection >= 1/3 && cSelection < 2/3){
+                compMove = 1;
+                alert('Computer chose paper');
+            }else{
+                compMove = 2;
+                alert('Computer chose scissors');
+            }
+
+            //tie
+            if(compMove == userChoice){
+                score.ties++;
+                alert('Its a Tie');
+            }
+            //wins
+            if( compMove == 0 && userChoice == 1){
+                score.wins++;
+                alert('You Won');
+            }else if(compMove == 1 && userChoice == 2){
+                score.wins++;
+                alert('You Won');
+            }else if(compMove == 2 && userChoice == 0){
+                score.wins++;
+                alert('You Won');
+            }
+
+            //loses
+            if( compMove == 1 && userChoice == 0){
+                score.loses++;
+                alert('You lose');
+            }else if(compMove == 2 && userChoice == 1){
+                score.loses++;
+                alert('You lose');
+            }else if(compMove == 0 && userChoice == 2){
+                score.loses++;
+                alert('You lose');
+            }
+
+            localStorage.setItem('score', JSON.stringify(score));
+
+            alert(`Wins:${score.wins}, Loses:${score.loses}, Ties:${score.ties}`);
+        }
+    </script>
+</body>
+</html>

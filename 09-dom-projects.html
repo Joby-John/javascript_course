@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Projects</title>
+</head>
+<body>
+    <p>
+        Youtube Subsribe Button
+    </p>
+
+    <button class="js-subscribe-btn" 
+            onclick="subscription();">
+                Subscribe
+    </button>
+
+    <p>Amazon Shipping Calculator</p>
+    <p>Orders under $40 = +$10 shipping.</p>
+    <p>Orders over $40 = FREE shipping</p>
+    <input type="number" id="js-order-cost"  
+            onkeydown= "handleKeyDown(event);" 
+            placeholder="Cost of order">
+
+    <button onclick="calcTotal();">Calculate</button>
+    <p id="js-display-total"></p>
+
+    <input type="text" name="" id="js-onkey-inp" onkeyup="keyUpEx();">
+    <p id="js-onkey-p"></p>
+
+    <script>
+        function keyUpEx(){
+            const val = document.getElementById('js-onkey-inp').value;
+            const pEle = document.getElementById('js-onkey-p');
+            pEle.innerHTML = val;
+        }
+
+        
+        function handleKeyDown(event){
+            if(event.key === 'Enter'){
+                calcTotal();
+            }
+        }
+        function calcTotal(){
+            let total = 0;
+            const orderValue = Number(document.getElementById('js-order-cost').value);
+
+            if(orderValue <= 0){
+                total = 0;
+            }else if(orderValue >= 40){
+                total = orderValue;
+            }else{
+                total = orderValue + 10;
+            }
+
+            const totalDisplay = document.querySelector('#js-display-total');
+
+            if(total > 0){
+                totalDisplay.innerHTML = '$' + total.toFixed(2);
+            }else{
+                totalDisplay.innerHTML = '';
+            }
+            
+        }
+
+
+        function subscription(){
+            const butElement = document.querySelector('.js-subscribe-btn');
+
+            let newText = 'Subscribe';
+            if(butElement.innerText === 'Subscribe'){
+                // inner text gives only the e\text in the element avoiding spaces.
+                newText = 'Subscribed';
+            }
+
+            butElement.innerHTML = newText;
+
+        }
+    </script>
+</body>
+</html>

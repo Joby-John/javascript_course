@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Objects</title>
+</head>
+<body>
+    
+    <script>
+        //object groups multiple values together and lets us use multiple values together
+        /*const product = {
+            name : 'socks',
+            price : 1090
+        };
+
+        console.log(product);
+        console.log(product.name);
+
+        product.name = 'cotton socks'
+
+        product.newProperty = true; // adding a new property
+        console.log(product);
+
+        delete product.newProperty;
+        console.log(product);
+        console.log(typeof product)
+        */
+        
+        /*
+        // we use dot notation by default
+        // for properties that doesnt work with dot notation we use bracket notation
+
+
+        const product2 ={
+            name:'shirt', 
+            'delivery-time' : ' 1 day',
+            rating :{
+                stars : 4.5, 
+                count :87
+            },
+
+            fun : function getReviewCount(){
+                console.log(product2.rating.count)
+            }
+        }
+
+        console.log(product2);
+        console.log(product2.name);
+        console.log(product2['name']);
+        console.log(product2['delivery-time']);
+        console.log(product2.rating.count);
+        console.log(product2['rating']['stars']);
+        product2.fun();
+
+        const json1 = JSON.stringify(product2); // to convert js object to JSON
+
+        console.log(json1);
+
+        const jsObject = JSON.parse(json1);// to convert to js object
+        console.log(jsObject);
+        */
+
+        console.log('hello'.length);
+        console.log('hello'.toUpperCase());
+
+        const obj1 = {
+            message : 'hello'
+        };
+
+        let obj1Ref = obj1;//copy by reference
+
+        console.log(obj1);
+        obj1Ref.message = 'world';
+        console.log(obj1);
+
+        const obj3 = {
+            message :'world'
+        };
+        
+        // we are comparing references
+        console.log(obj1 === obj3);
+        console.log(obj1 === obj1Ref);
+
+        const obj4 = {
+            message :'world',
+            price: 10
+        };
+
+        //const message = obj4.message;
+        //is same as 
+        const {message, price} = obj4; // called destructure, works when has name matches var name we need.
+
+        const obj5 ={
+            //message : message
+            //same as 
+            message,
+            
+            /*method: function func1(){
+                console.log('method');
+            }*/
+            //same as
+            method(){
+                console.log('method');
+            }            
+        };
+
+        console.log(obj5);
+        obj5.method();
+
+    </script>
+</body>
+</html>

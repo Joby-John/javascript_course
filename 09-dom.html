@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM</title>
+</head>
+<body>
+    <button>hello</button>
+    <!-- Tip js-anything is a common practice to ndicate this element is called in script -->
+    <button class="js-button">Second button</button>
+    <button id="js-but3"> Third button</button>
+    <script>
+
+        console.log(document.querySelector('button')); // gets first specified element from the page
+        document.querySelector('button').innerHTML = 'Changed';
+
+        document.querySelector('.js-button').innerHTML = 'Second Changed';
+        document.querySelector('#js-but3').innerHTML = 'Third Changed';
+        
+        const thirdButton = document.querySelector('#js-but3');
+        console.log(thirdButton);
+        
+        /*
+            console.log(document.title);
+            document.tile = 'changed';
+
+            console.log(document.body);
+
+            console.log(document.body.innerHTML);
+            document.body.innerHTML = '<button> Good Job </button>';
+        */
+       /*
+            document.body.innerHTML = 'hello'; // this removes everything on page and replaces it with this
+
+        document.title = 'Good Job!';
+       */
+    </script>
+</body>
+</html>
