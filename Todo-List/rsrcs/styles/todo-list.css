@@ -1,0 +1,45 @@
+.title{
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+.add-btn, .del-btn{
+    color: white;
+    border: none;
+    font-size: 15px;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+
+.add-btn{
+    background-color: green;
+}
+.del-btn{
+    background-color: darkred;
+}
+
+.todo-text, .todo-date{
+    font-size: 15px;
+    padding: 6px;
+}
+
+.js-todo-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.todo-item{
+    display: grid;
+    grid-template-columns: 1fr 150px 100px;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.todo-content{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
