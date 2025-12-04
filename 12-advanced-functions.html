@@ -43,6 +43,7 @@
         //just sets timer and rest of the code is executed and the code 
         //inside is executed when time reaches.
 
+        /*
         setTimeout(function(){
             console.log('timeout')
         }, 3000);
@@ -52,6 +53,16 @@
         setInterval(function(){
             console.log('SetInterval')
         }, 1000);
+        */
+
+        const arr1 = ['note1', 'note2', 'note3']
+
+        arr1.forEach(function(value, index){
+            if(value === 'note2') return; // return is used in place of continue in for each
+            // we dont have break in foreach
+            console.log(`${value} at index : ${index}`);
+        });
+
     </script>
 </body>
 </html>
