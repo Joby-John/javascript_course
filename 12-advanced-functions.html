@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Advanced Functions</title>
+</head>
+<body>
+    
+    <script>
+        /*
+        // anonymous function
+        const func1 = function(){
+            console.log('Hello World');
+        };
+
+        console.log(func1);
+        func1();
+
+        //function inside objects
+        const obj1 = {
+            num : 2, 
+            fun : function(){
+                console.log('Greeting 2');
+            }
+        }
+
+        obj1.fun();
+
+        //passing function as parameter
+
+        function run(param){
+            param();
+        }
+
+        run(function(){
+            console.log('parameter function hello');
+        });
+        */
+
+        // to call a function after set time
+        // this allows asynchronous as setTimeout doesnt block execution it 
+        //just sets timer and rest of the code is executed and the code 
+        //inside is executed when time reaches.
+
+        setTimeout(function(){
+            console.log('timeout')
+        }, 3000);
+
+        console.log('nextLine');
+
+        setInterval(function(){
+            console.log('SetInterval')
+        }, 1000);
+    </script>
+</body>
+</html>

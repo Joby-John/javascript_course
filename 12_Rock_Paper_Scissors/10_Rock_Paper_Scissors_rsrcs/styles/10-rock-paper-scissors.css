@@ -1,0 +1,56 @@
+body{
+            background-color: rgb(25, 25, 25);
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        
+        .title{
+            font-size: 30px;
+            font-weight: bold;
+        }
+        .mv-icon{
+            height: 50px;
+        }
+
+        .mv-btn{
+            background-color: transparent;
+            border: 3px solid white;
+            width: 120px;
+            height: 120px;
+            border-radius: 60px;
+            margin-right: 10px;
+            cursor: pointer;
+        }
+
+        .result{
+            font-size: 25px;
+            font-weight: bold;
+            margin-top: 50px;
+        }
+
+        .move-line{
+            margin-top: 60px;
+        }
+
+        .score{
+            margin-top: 50px;
+        }
+
+        .result-Icon{
+            width: 50px;
+            height: 50px;
+        }
+
+        .rst-btn, .autoplay-btn{
+            background-color: whitesmoke;
+            border: none;
+            padding: 10px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        .autoplay-on{
+            background-color: gray;
+        }
+
+        
