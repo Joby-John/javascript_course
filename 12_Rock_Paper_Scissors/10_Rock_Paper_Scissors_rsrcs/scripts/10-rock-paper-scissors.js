@@ -14,7 +14,7 @@
             }
         }; */
         
-
+        //result display        
         const rockImg = '<img src="10_Rock_Paper_scissors_rsrcs/rock-emoji.png" class="result-Icon" alt="Rock" >';
 
         const paperImg = '<img src="10_Rock_Paper_scissors_rsrcs/paper-emoji.png" class="result-Icon" alt="Paper" >';
@@ -40,6 +40,27 @@
             scoreElement.innerHTML = `Wins: ${score.wins}, Loses: ${score.loses}, Ties: ${score.ties}`;
 
         } 
+
+        //move buttons
+        document.querySelector('.js-rock-btn').addEventListener('click',()=>{
+            play(0)
+        } );
+        document.querySelector('.js-paper-btn').addEventListener('click',()=>{
+            play(1)
+        } );
+        document.querySelector('.js-scissors-btn').addEventListener('click',()=>{
+            play(2)
+        } );
+
+        document.body.addEventListener('keydown', (event)=>{
+            if(event.key === 'r'){
+                play(0);
+            }else if(event.key === 'p'){
+                play(1);
+            }else if(event.key === 's'){
+                play(2);
+            }
+        });
 
         function play(userChoice){
          
@@ -106,11 +127,33 @@
                          moveImgs[userMove.toLowerCase()]);
 
         }
+        
+        //reset 
+        document.querySelector('.js-rst-btn').addEventListener('click', 
+            ()=>{
+                score.wins = 0;
+                score.loses = 0;
+                score.ties = 0;
+                localStorage.removeItem('score');
 
+                if(autoplay){
+                    autoPlay();
+                }
+
+                updateScreen();
+            }
+        );
+
+        //autoplay
+        const autoPlaybtn = document.querySelector('.autoplay-btn');
+
+        autoPlaybtn.addEventListener('click', ()=>{
+            autoPlay();
+        })
 
         let autoplay = false;
         let autoPlayIntervalID = null;
-        const autoPlaybtn = document.querySelector('.autoplay-btn');
+
         function autoPlay(){
             if(!autoplay){
                 autoplay = true;

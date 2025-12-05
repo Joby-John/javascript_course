@@ -7,7 +7,21 @@
 </head>
 <body>
     
+    <button class="js-btn">Click</button>
     <script>
+
+        const btn = document.querySelector('.js-btn');
+        
+        const eventListenerFunc = ()=>{
+            console.log('Click');
+        };
+        btn.addEventListener('click', eventListenerFunc);
+
+        btn.addEventListener('click', ()=>{
+            console.log('Click2');
+        });
+
+        btn.removeEventListener('click', eventListenerFunc);
         /*
         // anonymous function
         const func1 = function(){
@@ -55,6 +69,7 @@
         }, 1000);
         */
 
+        /*
         const arr1 = ['note1', 'note2', 'note3']
 
         arr1.forEach(function(value, index){
@@ -62,7 +77,35 @@
             // we dont have break in foreach
             console.log(`${value} at index : ${index}`);
         });
+        
+        const arrowFunction = (param1 , param2)=>{
+            console.log(param1 + param2);
+        }
 
+        arrowFunction(1, 4);
+
+        const oneParam = param =>{
+            console.log(param);
+        }
+        oneParam(1);
+
+        const oneLine = () => 1+2;
+
+        console.log(oneLine());
+
+        const obj2 = {
+            method: ()=>{
+
+            },
+
+            method(){
+                console.log('Hello');
+            }// this is preffered
+
+        }
+        obj2.method();
+
+        */
     </script>
 </body>
 </html>

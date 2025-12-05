@@ -11,15 +11,15 @@
     
     <p class="title">Rock paper Scissors</p>
 
-    <button onclick="play(0);" class="mv-btn">
+    <button class="mv-btn js-rock-btn">
             <img src="10_Rock_Paper_scissors_rsrcs/rock-emoji.png" alt="Rock" class="mv-icon">
     </button>
 
-    <button onclick="play(1);" class="mv-btn">
+    <button class="mv-btn js-paper-btn">
             <img src="10_Rock_Paper_scissors_rsrcs/paper-emoji.png" alt="Paper" class="mv-icon">
     </button>
 
-    <button onclick="play(2);" class="mv-btn">
+    <button class="mv-btn js-scissors-btn">
         <img src="10_Rock_Paper_scissors_rsrcs/scissors-emoji.png" alt="Scissors" class="mv-icon">
     </button>
 
@@ -27,23 +27,11 @@
     <p class="js-moves move-line" ></p>
     <p class="js-score score"> Wins:0, Loses:0, Ties:0</p>
 
-    <button onclick="
-        score.wins = 0;
-        score.loses = 0;
-        score.ties = 0;
-        localStorage.removeItem('score');
-        if(autoplay){
-            autoPlay();
-        }
-
-        updateScreen();
-    " class="rst-btn">
+    <button class="rst-btn js-rst-btn">
         Reset Score
     </button>
 
-    <button onclick="
-        autoPlay();
-    " class="js-autoplay-btn autoplay-btn">
+    <button class="js-autoplay-btn autoplay-btn">
         Auto Play
     </button>
 
