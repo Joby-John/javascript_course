@@ -9,7 +9,7 @@
     
     <button class="js-btn">Click</button>
     <script>
-
+        /*
         const btn = document.querySelector('.js-btn');
         
         const eventListenerFunc = ()=>{
@@ -22,6 +22,7 @@
         });
 
         btn.removeEventListener('click', eventListenerFunc);
+        */
         /*
         // anonymous function
         const func1 = function(){
@@ -106,6 +107,18 @@
         obj2.method();
 
         */
+
+        console.log([1, -3, 5].filter((value, index)=>{
+            return value >= 0;
+        }));
+
+        let newArr = [1, 1, 3].map((value, index)=>{
+            return value*10;
+        });
+        //same as above but removed unneccessary elements
+        let newArr2 = [1, 1, 3].map(value => value*10);
+        console.log(newArr);
+        console.log(newArr2);
     </script>
 </body>
 </html>
