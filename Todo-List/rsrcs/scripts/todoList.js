@@ -1,6 +1,8 @@
 
 todoList = [];
 displayTodo();
+
+// save and retrieve from memory logic
 function save(todoList){
     localStorage.setItem('todoList', JSON.stringify(todoList));
 }
@@ -8,6 +10,11 @@ function save(todoList){
 function retrieve(){
     return JSON.parse(localStorage.getItem('todoList'))||[];
 }
+
+//add todo
+document.querySelector('.js-add-btn').addEventListener('click', ()=>{
+    addTodo();
+});
 
 function addTodo(){
     const todoText = document.querySelector('.todo-text');
@@ -33,6 +40,7 @@ function addTodo(){
     console.log(todoList);
 }
 
+//todo list logic
 function displayTodo(){
     todoList = retrieve();
     const listDiv = document.querySelector('.js-todo-list');
