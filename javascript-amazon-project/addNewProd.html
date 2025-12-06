@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Product</title>
+</head>
+<body>
+
+    <h2>Add New Product</h2>
+
+    <form>
+        <label>Product name</label><br>
+        <input type="text" name="productName" class="js-prod-name" required><br><br>
+
+        <label>Product image link</label><br>
+        <input type="text" name="imageUrl" class="js-prodImg-link" required><br><br>
+
+        <label>Rating</label><br>
+        <input type="number" name="starCount" placeholder="star count" class="js-starCount" step="0.1">
+        <input type="number" name="reviewCount" placeholder="review count" class="js-reviewCount" required><br><br>
+
+        <label>Price in $</label><br>
+        <input type="number" name="price" class="js-price" required step="0.01"><br><br>
+
+        <button type="submit" class="js-save-btn">Save Product</button>
+    </form>
+
+    <script src="scripts/amazon.js"></script>
+</body>
+</html>
