@@ -1,5 +1,5 @@
 import {cart} from '../data/cart.js';
-import {products as productList} from '../data/products.js';
+import {products as productsList} from '../data/products.js';
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         prodGrid.innerHTML = '';
 
-        productList.forEach(product => {
+        productsList.forEach(product => {
             const clone = template.content.cloneNode(true);
             clone.querySelector('.product-image').src = product.image;
             clone.querySelector('.product-name').textContent = product.name;
@@ -49,57 +49,63 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     function addTocartButtonEvents(){
-            document.querySelectorAll('.js-add-to-cart').forEach((button)=>{
+        document.querySelectorAll('.js-add-to-cart').forEach((button)=>{
 
-                button.addEventListener('click', ()=>{
-                    
-                    const productId = button.dataset.productId;
-                    let matchingItem;
-
-                    cart.forEach((product) =>{
-                        if(product.productId === productId){
-                            matchingItem = product;
-                        }
-
-                    });
-
-                    if(matchingItem){
-                        matchingItem.quantity += 1;
-                    }else{
-                        cart.push(
-                        {
-                            productId: productId,
-                            quantity:1,
-                        });
-                    }
-
-                    // counting for cartquantity
-                    cartQuantity = 0;
-                    cart.forEach((product) =>{
-                        cartQuantity += product.quantity;
-                    });
-                    cartQuantityEle.textContent = cartQuantity;
-
-
-                    // For the "Added to Cart" animation:
-                    const addedTocartDiv = button.closest('.js-product-container').querySelector('.js-added-to-cart');
-
-                    // In JavaScript, every object can have custom properties.
-                    // Here, we attach a `timeOutId` property to each product's addedTocartDiv
-                    // This ensures each product card has its own independent timeout.
-                    if(addedTocartDiv.timeOutId){
-                        clearTimeout(addedTocartDiv.timeOutId);// cancel any previous timeout if user clicks again quickly
-                    }
-
-                    addedTocartDiv.classList.add('added-to-cart-vis');
-
-                    addedTocartDiv.timeOutId = setTimeout(()=>{
-                        addedTocartDiv.classList.remove('added-to-cart-vis');
-
-                        addedTocartDiv.timeOutId = null;// clean up the custom property after the animation ends
-                    }, 2000)
-                });
-
+            button.addEventListener('click', ()=>{
+                
+                const productId = button.dataset.productId;
+                addToCart(productId);
+                addToCartAnimation(button);
             });
+
+        });
+    }
+
+    function addToCart(productId){
+        let matchingItem;
+
+        cart.forEach((product) =>{
+            if(product.productId === productId){
+                matchingItem = product;
+            }
+
+        });
+
+        if(matchingItem){
+            matchingItem.quantity += 1;
+        }else{
+            cart.push(
+            {
+                productId: productId,
+                quantity:1,
+            });
+        }
+
+        // counting for cartquantity
+        cartQuantity = 0;
+        cart.forEach((product) =>{
+            cartQuantity += product.quantity;
+        });
+        cartQuantityEle.textContent = cartQuantity;
+    }
+
+    function addToCartAnimation(button){
+        // For the "Added to Cart" animation:
+        const addedTocartDiv = button.closest('.js-product-container').querySelector('.js-added-to-cart');
+
+        // In JavaScript, every object can have custom properties.
+        // Here, we attach a `timeOutId` property to each product's addedTocartDiv
+        // This ensures each product card has its own independent timeout.
+        if(addedTocartDiv.timeOutId){
+            clearTimeout(addedTocartDiv.timeOutId);// cancel any previous timeout if user clicks again quickly
+        }
+
+        addedTocartDiv.classList.add('added-to-cart-vis');
+
+        addedTocartDiv.timeOutId = setTimeout(()=>{
+            addedTocartDiv.classList.remove('added-to-cart-vis');
+
+            addedTocartDiv.timeOutId = null;// clean up the custom property after the animation ends
+        }, 2000);
     }
 });
