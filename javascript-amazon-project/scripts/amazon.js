@@ -44,10 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    //no more used
-    // function getLocal(){
-    //     return JSON.parse(localStorage.getItem('prodList'));
-    // }
+    
 
 
     function addTocartButtonEvents(){
@@ -82,7 +79,23 @@ document.addEventListener('DOMContentLoaded', () => {
                     cartQuantityEle.textContent = cartQuantity;
 
 
-                    
+                    // For the "Added to Cart" animation:
+                    const addedTocartDiv = button.closest('.js-product-container').querySelector('.js-added-to-cart');
+
+                    // In JavaScript, every object can have custom properties.
+                    // Here, we attach a `timeOutId` property to each product's addedTocartDiv
+                    // This ensures each product card has its own independent timeout.
+                    if(addedTocartDiv.timeOutId){
+                        clearTimeout(addedTocartDiv.timeOutId);// cancel any previous timeout if user clicks again quickly
+                    }
+
+                    addedTocartDiv.classList.add('added-to-cart-vis');
+
+                    addedTocartDiv.timeOutId = setTimeout(()=>{
+                        addedTocartDiv.classList.remove('added-to-cart-vis');
+
+                        addedTocartDiv.timeOutId = null;// clean up the custom property after the animation ends
+                    }, 2000)
                 });
 
             });
