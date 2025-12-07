@@ -1,3 +1,7 @@
+import {cart} from '../data/cart.js'
+import {products} from '../data/products.js'
+
+
 document.addEventListener('DOMContentLoaded', () => {
 
 
@@ -49,6 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function addTocartButtonEvents(){
             document.querySelectorAll('.js-add-to-cart').forEach((button)=>{
+
                 button.addEventListener('click', ()=>{
                     
                     const productId = button.dataset.productId;
