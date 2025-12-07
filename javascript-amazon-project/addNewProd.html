@@ -6,10 +6,13 @@
     <title>Add New Product</title>
 </head>
 <body>
-
+    <h1>No more used as product is taken from product array in data/product.js</h1>
     <h2>Add New Product</h2>
 
     <form>
+        <label>Product Id</label><br>
+        <input type="text" name="productId" class="js-prod-id" required><br><br>
+
         <label>Product name</label><br>
         <input type="text" name="productName" class="js-prod-name" required><br><br>
 
@@ -23,9 +26,12 @@
         <label>Price in $</label><br>
         <input type="number" name="price" class="js-price" required step="0.01"><br><br>
 
+        <label>Product Keywords</label><br>
+        <input type="text" name="productKeyword" class="js-prod-keyword" placeholder="keyword1, keyword2, .." required><br><br>
+
         <button type="submit" class="js-save-btn">Save Product</button>
     </form>
 
-    <script src="scripts/amazon.js"></script>
+    <script src="scripts/add-product.js"></script>
 </body>
 </html>
