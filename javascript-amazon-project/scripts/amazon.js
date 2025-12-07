@@ -1,4 +1,4 @@
-import {cart} from '../data/cart.js';
+import * as cartModule from '../data/cart.js';
 import {products as productsList} from '../data/products.js';
 
 
@@ -6,10 +6,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     generateProducts();
     addTocartButtonEvents();
-
-    let cartQuantity = 0;
-    const cartQuantityEle = document.querySelector('.js-cart-quantity');
-    cartQuantityEle.textContent = cartQuantity;
 
     function generateProducts() {
         const prodGrid = document.querySelector('.js-product-grid');
@@ -45,67 +41,29 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    
-
-
     function addTocartButtonEvents(){
         document.querySelectorAll('.js-add-to-cart').forEach((button)=>{
 
             button.addEventListener('click', ()=>{
                 
                 const productId = button.dataset.productId;
-                addToCart(productId);
-                addToCartAnimation(button);
+                cartModule.addToCart(productId);
+                updateCartQuantity();
+                cartModule.addToCartAnimation(button);
             });
 
         });
     }
 
-    function addToCart(productId){
-        let matchingItem;
-
-        cart.forEach((product) =>{
-            if(product.productId === productId){
-                matchingItem = product;
-            }
-
-        });
-
-        if(matchingItem){
-            matchingItem.quantity += 1;
-        }else{
-            cart.push(
-            {
-                productId: productId,
-                quantity:1,
-            });
-        }
-
+    function updateCartQuantity(){
+         let cartQuantity = 0;
+        const cartQuantityEle = document.querySelector('.js-cart-quantity');
+        
         // counting for cartquantity
-        cartQuantity = 0;
-        cart.forEach((product) =>{
-            cartQuantity += product.quantity;
+        cartModule.cart.forEach((cartItem) =>{
+            cartQuantity += cartItem.quantity;
         });
-        cartQuantityEle.textContent = cartQuantity;
-    }
-
-    function addToCartAnimation(button){
-        // For the "Added to Cart" animation:
-        const addedTocartDiv = button.closest('.js-product-container').querySelector('.js-added-to-cart');
-
-        // In JavaScript, every object can have custom properties.
-        // Here, we attach a `timeOutId` property to each product's addedTocartDiv
-        // This ensures each product card has its own independent timeout.
-        if(addedTocartDiv.timeOutId){
-            clearTimeout(addedTocartDiv.timeOutId);// cancel any previous timeout if user clicks again quickly
-        }
-
-        addedTocartDiv.classList.add('added-to-cart-vis');
-
-        addedTocartDiv.timeOutId = setTimeout(()=>{
-            addedTocartDiv.classList.remove('added-to-cart-vis');
-
-            addedTocartDiv.timeOutId = null;// clean up the custom property after the animation ends
-        }, 2000);
+        cartQuantityEle.innerHTML = cartQuantity;
+        console.log(cartModule.cart);
     }
 });
