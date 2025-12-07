@@ -1,11 +1,8 @@
-import {cart} from '../data/cart.js'
-import {products} from '../data/products.js'
+import {cart} from '../data/cart.js';
+import {products as productList} from '../data/products.js';
 
 
 document.addEventListener('DOMContentLoaded', () => {
-
-
-    const productList = products;
 
     generateProducts();
     addTocartButtonEvents();
