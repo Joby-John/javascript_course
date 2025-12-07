@@ -6,6 +6,9 @@ document.addEventListener('DOMContentLoaded', () => {
     generateProducts();
     addTocartButtonEvents();
 
+    let cartQuantity = 0;
+    const cartQuantityEle = document.querySelector('.js-cart-quantity');
+    cartQuantityEle.textContent = cartQuantity;
 
     function generateProducts() {
         const prodGrid = document.querySelector('.js-product-grid');
@@ -58,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         if(product.productId === productId){
                             matchingItem = product;
                         }
+
                     });
 
                     if(matchingItem){
@@ -67,11 +71,18 @@ document.addEventListener('DOMContentLoaded', () => {
                         {
                             productId: productId,
                             quantity:1,
-                        }
-                    )
+                        });
                     }
 
-                    console.log(cart);
+                    // counting for cartquantity
+                    cartQuantity = 0;
+                    cart.forEach((product) =>{
+                        cartQuantity += product.quantity;
+                    });
+                    cartQuantityEle.textContent = cartQuantity;
+
+
+                    
                 });
 
             });
