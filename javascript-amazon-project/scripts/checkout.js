@@ -1,5 +1,6 @@
 import {cart} from '../data/cart.js';
 import {products} from '../data/products.js';
+import * as moneyUtils from './utils/money.js';
 
 
 
@@ -16,12 +17,17 @@ cart.forEach((cartItem)=>{
     
 
     if(matchingProduct){
-        let priceDollars = (matchingProduct.priceCents/100).toFixed(2);
+
         const clone = template.content.cloneNode(true);
         clone.querySelector('.js-product-image').src = matchingProduct.image;
         clone.querySelector('.js-product-name').innerHTML = matchingProduct.name;
-        clone.querySelector('.js-product-price').innerHTML = `$${priceDollars}`;
+        clone.querySelector('.js-product-price').innerHTML = `$${moneyUtils.formatCurrency(matchingProduct.priceCents)}`;
         clone.querySelector('.js-quantity-label').innerHTML = quantity;
+        const deliveryInputRadios = clone.querySelectorAll('.js-delivery-option-input');
+
+        deliveryInputRadios.forEach((input)=>{
+            input.name = `${matchingProduct.id}-delivery-option`; 
+        });
 
         cartContainer.appendChild(clone);
 

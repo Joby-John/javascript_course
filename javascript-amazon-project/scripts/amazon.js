@@ -1,5 +1,6 @@
 import * as cartModule from '../data/cart.js';
 import {products as productsList} from '../data/products.js';
+import * as moneyUtils from './utils/money.js';
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -32,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
             clone.querySelector('.product-name').textContent = product.name;
             clone.querySelector('.product-rating-stars').src = starImgs[Math.round(product.rating.stars * 2) / 2];
             clone.querySelector('.product-rating-count').textContent = product.rating.count;
-            clone.querySelector('.product-price').textContent = `$${(product.priceCents / 100).toFixed(2)}`;
+            clone.querySelector('.product-price').textContent = `$${moneyUtils.formatCurrency(product.priceCents)}`;
 
             clone.querySelector('.js-add-to-cart').dataset.productId= product.id; 
 
