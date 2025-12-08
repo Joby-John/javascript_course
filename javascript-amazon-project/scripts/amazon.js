@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     generateProducts();
     addTocartButtonEvents();
+    updateCartQuantity();
 
     function generateProducts() {
         const prodGrid = document.querySelector('.js-product-grid');
@@ -61,10 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const cartQuantityEle = document.querySelector('.js-cart-quantity');
         
         // counting for cartquantity
-        cartModule.cart.forEach((cartItem) =>{
-            cartQuantity += cartItem.quantity;
-        });
+        cartQuantity = cartModule.countCart();
         cartQuantityEle.innerHTML = cartQuantity;
-        console.log(cartModule.cart);
     }
 });

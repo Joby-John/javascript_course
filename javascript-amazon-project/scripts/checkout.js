@@ -1,7 +1,6 @@
-import {cart, removeFromCart} from '../data/cart.js';
+import {cart, removeFromCart, countCart} from '../data/cart.js';
 import {products} from '../data/products.js';
 import * as moneyUtils from './utils/money.js';
-
 
 
 const cartContainer = document.querySelector('.js-order-summary');
@@ -18,7 +17,7 @@ cart.forEach((cartItem)=>{
 
     if(matchingProduct){
 
-        const clone = template.content.cloneNode(true);
+        const clone = template.content.cloneNode(true);     
         clone.querySelector('.js-product-image').src = matchingProduct.image;
         clone.querySelector('.js-product-name').innerHTML = matchingProduct.name;
         clone.querySelector('.js-product-price').innerHTML = `$${moneyUtils.formatCurrency(matchingProduct.priceCents)}`;
@@ -45,6 +44,8 @@ cart.forEach((cartItem)=>{
 
     }
 
+    updateCartCountTop();
+
 });
 
 function addClickEventToDelete(deleteLinks){
@@ -56,7 +57,13 @@ function addClickEventToDelete(deleteLinks){
                const productContainer = document.querySelector(`[data-cart-item-id="${productId}"]`);
                
                productContainer.remove();
+               updateCartCountTop();
                
             })
         });
+}
+
+function updateCartCountTop(){
+    let cartQuantity = countCart();
+    document.querySelector('.checkout-top-count').textContent = `${cartQuantity} Items`;   
 }
