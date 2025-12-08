@@ -1,4 +1,4 @@
-import {cart} from '../data/cart.js';
+import {cart, removeFromCart} from '../data/cart.js';
 import {products} from '../data/products.js';
 import * as moneyUtils from './utils/money.js';
 
@@ -28,6 +28,18 @@ cart.forEach((cartItem)=>{
         deliveryInputRadios.forEach((input)=>{
             input.name = `${matchingProduct.id}-delivery-option`; 
         });
+
+        const deleteLinks = clone.querySelectorAll('.js-delete-quantity-link');
+        deleteLinks.forEach((links)=>{
+            links.dataset.productId = matchingProduct.id;
+        });
+        deleteLinks.forEach((link)=>{
+            link.addEventListener('click', ()=>{
+               const productId = link.dataset.productId;
+               removeFromCart(productId);
+               
+            })
+        })
 
         cartContainer.appendChild(clone);
 
