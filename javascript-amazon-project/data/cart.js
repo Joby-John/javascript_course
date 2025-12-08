@@ -46,11 +46,16 @@ export function addToCartAnimation(button){
 
 export function removeFromCart(productId){
     let newCart = [];
+
     cart.forEach((product)=>{
         if(product.productId !== productId){
             newCart.push(product);
         }
     });
+
+    const productContainer = document.querySelector(`[data-cart-item-id="${productId}"]`);
+
+    productContainer.remove();
 
     cart = newCart;
     saveToStorage();
@@ -65,6 +70,6 @@ export function countCart(){
     return cartQuantity;
 }
 
-function saveToStorage(){
+export function saveToStorage(){
     localStorage.setItem('cart', JSON.stringify(cart));
 }

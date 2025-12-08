@@ -1,4 +1,4 @@
-import {cart, removeFromCart, countCart} from '../data/cart.js';
+import * as cartModule from '../data/cart.js';
 import {products} from '../data/products.js';
 import * as moneyUtils from './utils/money.js';
 
@@ -6,7 +6,7 @@ import * as moneyUtils from './utils/money.js';
 const cartContainer = document.querySelector('.js-order-summary');
 const template = document.querySelector('#cart-item-template');
 
-cart.forEach((cartItem)=>{
+cartModule.cart.forEach((cartItem)=>{
     const productId = cartItem.productId;
     let quantity = cartItem.quantity;
 
@@ -22,6 +22,25 @@ cart.forEach((cartItem)=>{
         clone.querySelector('.js-product-name').innerHTML = matchingProduct.name;
         clone.querySelector('.js-product-price').innerHTML = `$${moneyUtils.formatCurrency(matchingProduct.priceCents)}`;
         clone.querySelector('.js-quantity-label').innerHTML = quantity;
+        clone.querySelector('.js-new-quantity-input').value = quantity;
+
+        const updateLink = clone.querySelector('.js-update-quantity-link');
+        updateLink.addEventListener('click', ()=>{
+            const container = updateLink.closest('.js-cart-item');
+            container.classList.add('is-editing-quantity');
+        });
+
+        const saveLink = clone.querySelector('.js-save-quantity-link');
+        saveLink.addEventListener('click', ()=>{
+            const container = saveLink.closest('.js-cart-item');
+            container.classList.remove('is-editing-quantity');
+            const inputElement = container.querySelector('.js-new-quantity-input');
+            let newQuantity = updateProductCount(inputElement, matchingProduct.id);
+            container.querySelector('.js-quantity-label').innerHTML = newQuantity; 
+
+            updateCartCountTop();
+        });
+
         const deliveryInputRadios = clone.querySelectorAll('.js-delivery-option-input');
 
         deliveryInputRadios.forEach((input)=>{
@@ -52,11 +71,8 @@ function addClickEventToDelete(deleteLinks){
     deleteLinks.forEach((link)=>{
             link.addEventListener('click', ()=>{
                const productId = link.dataset.productId;
-               removeFromCart(productId);
-               
-               const productContainer = document.querySelector(`[data-cart-item-id="${productId}"]`);
-               
-               productContainer.remove();
+               cartModule.removeFromCart(productId);
+
                updateCartCountTop();
                
             })
@@ -64,6 +80,24 @@ function addClickEventToDelete(deleteLinks){
 }
 
 function updateCartCountTop(){
-    let cartQuantity = countCart();
+    let cartQuantity = cartModule.countCart();
     document.querySelector('.checkout-top-count').textContent = `${cartQuantity} Items`;   
+}
+
+function updateProductCount(inputElement, productId){
+    let newItemCount = Number(inputElement.value);
+
+    if(newItemCount <= 0){
+        cartModule.removeFromCart(productId);
+        return 0;
+    }
+
+    let matchingItem = cartModule.cart.find(item => item.productId === productId);
+
+
+    if(matchingItem){
+        matchingItem.quantity = newItemCount;
+        cartModule.saveToStorage();
+    }
+    return newItemCount;
 }
