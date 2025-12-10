@@ -143,9 +143,7 @@ function GenerateDeliveryOptionsHtml(DeliveryOptionContainer, matchingProduct, c
         const temp = document.createElement('div');
 
         temp.innerHTML = `
-            <div class="js-delivery-option delivery-option"
-                  data-delivery-option-id="f297d333-a5c4-452f-840b-15a662257b3f"
-                  data-testid="delivery-option-f297d333-a5c4-452f-840b-15a662257b3f">
+            <div class="js-delivery-option delivery-option">
 
                   <input class="js-delivery-option-input delivery-option-input" 
                     name="${matchingProduct.id}-delivery-option" type="radio"
@@ -162,6 +160,8 @@ function GenerateDeliveryOptionsHtml(DeliveryOptionContainer, matchingProduct, c
                 </div>
         `
         const option = temp.firstElementChild;
+        option.dataset.productId = matchingProduct.id;
+        option.dataset.optionId = deliveryOption.id;
         parentContainer.appendChild(option);
         if(deliveryOption.id === cartItem.deliveryOptionId){
            const input = option.querySelector('.js-delivery-option-input');
@@ -169,7 +169,26 @@ function GenerateDeliveryOptionsHtml(DeliveryOptionContainer, matchingProduct, c
            
            parentContainer.closest('.js-cart-item').querySelector('.js-delivery-date').innerHTML = dateString; 
         }
+
+        //radio clicks
+        option.addEventListener('click', ()=>{
+            updateRadioSelection(option, dateString);
+        });
+        
+        const input = option.querySelector('.js-delivery-option-input');
+        input.addEventListener('change', ()=>{
+            updateRadioSelection(option, dateString);
+        })
     });
 
+}
 
+function updateRadioSelection(option, dateString){
+    const {productId, optionId} = option.dataset;
+    const input = option.querySelector('.js-delivery-option-input');
+
+    input.checked = true;
+    
+    cartModule.updateDeliveryOption(productId, optionId);
+    option.closest('.js-cart-item').querySelector('.js-delivery-date').innerHTML = dateString;
 }

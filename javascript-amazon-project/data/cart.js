@@ -74,3 +74,17 @@ export function countCart(){
 export function saveToStorage(){
     localStorage.setItem('cart', JSON.stringify(cart));
 }
+
+export function updateDeliveryOption(productId, deliveryOptionId){
+
+    const matchingItem = cart.find((item) => 
+        {
+            return item.productId === productId
+        });
+    
+        if(matchingItem){
+            matchingItem.deliveryOptionId = deliveryOptionId;
+            saveToStorage();
+        }
+
+}
