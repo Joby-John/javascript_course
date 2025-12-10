@@ -8,8 +8,10 @@ import { deliveryOptions } from '../data/delivery-options.js';
 const cartContainer = document.querySelector('.js-order-summary');
 const template = document.querySelector('#cart-item-template');
 
-function renderOrderSummmary()
-{
+
+renderOrderSummmary();
+
+function renderOrderSummmary(){
     cartContainer.innerHTML = '';
     cartModule.cart.forEach((cartItem) => {
         const productId = cartItem.productId;
@@ -45,6 +47,7 @@ function renderOrderSummmary()
             const saveLink = clone.querySelector('.js-save-quantity-link');
             saveLink.addEventListener('click', () => {
                 updateProductCount(inputQuantityElement, matchingProduct.id, cartItem);
+                
             });
 
             const deleteLinks = clone.querySelectorAll('.js-delete-quantity-link');
@@ -71,25 +74,28 @@ function renderOrderSummmary()
         updateCartCountTop();
 
     });
+}
 
-    function addClickEventToDelete(deleteLinks) {
+function addClickEventToDelete(deleteLinks) {
         deleteLinks.forEach((link) => {
             link.addEventListener('click', () => {
                 const productId = link.dataset.productId;
                 cartModule.removeFromCart(productId);
 
-                updateCartCountTop();
+
+                renderOrderSummmary();
+
 
             })
         });
     }
 
-    function updateCartCountTop() {
+function updateCartCountTop() {
         let cartQuantity = cartModule.countCart();
         document.querySelector('.checkout-top-count').textContent = `${cartQuantity} Items`;
     }
 
-    function updateProductCount(inputElement, productId) {
+function updateProductCount(inputElement, productId) {
         const container = inputElement.closest('.js-cart-item');
         container.classList.remove('is-editing-quantity');
 
@@ -124,12 +130,10 @@ function renderOrderSummmary()
             matchingItem.quantity = newItemCount;
             cartModule.saveToStorage();
         }
-        updateCartCountTop();
-        container.querySelector('.js-quantity-label').innerHTML = newItemCount;
+        renderOrderSummmary();
     }
 
-
-    function GenerateDeliveryOptionsHtml(DeliveryOptionContainer, matchingProduct, cartItem) {
+ function GenerateDeliveryOptionsHtml(DeliveryOptionContainer, matchingProduct, cartItem) {
         const parentContainer = DeliveryOptionContainer;
         const today = dayjs();
 
@@ -167,10 +171,10 @@ function renderOrderSummmary()
             option.dataset.optionId = deliveryOption.id;
             parentContainer.appendChild(option);
             if(deliveryOption.id === cartItem.deliveryOptionId){
-            const input = option.querySelector('.js-delivery-option-input');
-            input.checked = true;
-            
-            parentContainer.closest('.js-cart-item').querySelector('.js-delivery-date').innerHTML = dateString; 
+                const input = option.querySelector('.js-delivery-option-input');
+                input.checked = true;
+                
+                parentContainer.closest('.js-cart-item').querySelector('.js-delivery-date').innerHTML = dateString; 
             }
 
             //radio clicks
@@ -186,14 +190,11 @@ function renderOrderSummmary()
 
     }
 
-    function updateRadioSelection(option, dateString){
+function updateRadioSelection(option, dateString){
         const {productId, optionId} = option.dataset;
-        
+
         cartModule.updateDeliveryOption(productId, optionId);
 
         renderOrderSummmary();
     }
 
-}
-
-renderOrderSummmary();
