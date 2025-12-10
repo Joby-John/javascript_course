@@ -179,18 +179,18 @@ function updateProductCount(inputElement, productId) {
 
             //radio clicks
             option.addEventListener('click', ()=>{
-                updateRadioSelection(option, dateString);
+                updateRadioSelection(option);
             });
             
             const input = option.querySelector('.js-delivery-option-input');
             input.addEventListener('change', ()=>{
-                updateRadioSelection(option, dateString);
+                updateRadioSelection(option);
             })
         });
 
     }
 
-function updateRadioSelection(option, dateString){
+function updateRadioSelection(option){
         const {productId, optionId} = option.dataset;
 
         cartModule.updateDeliveryOption(productId, optionId);
