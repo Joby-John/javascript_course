@@ -1,8 +1,9 @@
 import * as cartModule from '../../data/cart.js';
-import { products } from '../../data/products.js';
+import { products, findMatchingProduct } from '../../data/products.js';
 import * as moneyUtils from '../utils/money.js';
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 import { deliveryOptions } from '../../data/delivery-options.js';
+import { renderPaymentSummary } from './paymentSummary.js';
 
 
 const cartContainer = document.querySelector('.js-order-summary');
@@ -17,8 +18,7 @@ export function renderOrderSummmary(){
         const productId = cartItem.productId;
         let quantity = cartItem.quantity;
 
-        const matchingProduct = products.find(product =>
-            productId === product.id);
+        const matchingProduct = findMatchingProduct(productId);
 
 
 
@@ -74,6 +74,9 @@ export function renderOrderSummmary(){
         updateCartCountTop();
 
     });
+
+    //everytime order summary updates payment summary also updates
+    renderPaymentSummary();
 }
 
 function addClickEventToDelete(deleteLinks) {
@@ -113,6 +116,7 @@ function updateProductCount(inputElement, productId) {
         if (newItemCount === 0) {
             cartModule.removeFromCart(productId);
             updateCartCountTop();
+            renderOrderSummmary();
             return;
         }
 
@@ -170,6 +174,7 @@ function updateProductCount(inputElement, productId) {
             option.dataset.productId = matchingProduct.id;
             option.dataset.optionId = deliveryOption.id;
             parentContainer.appendChild(option);
+
             if(deliveryOption.id === cartItem.deliveryOptionId){
                 const input = option.querySelector('.js-delivery-option-input');
                 input.checked = true;
