@@ -4,6 +4,7 @@ import * as moneyUtils from '../utils/money.js';
 import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 import { deliveryOptions } from '../../data/delivery-options.js';
 import { renderPaymentSummary } from './paymentSummary.js';
+import {updateCartCountTop} from './checkoutHeader.js';
 
 
 const cartContainer = document.querySelector('.js-order-summary');
@@ -71,7 +72,7 @@ export function renderOrderSummmary(){
 
         }
     });
-    
+
     updateCartCountTop();
     //everytime order summary updates payment summary also updates
     renderPaymentSummary();
@@ -89,11 +90,6 @@ function addClickEventToDelete(deleteLinks) {
 
             })
         });
-    }
-
-function updateCartCountTop() {
-        let cartQuantity = cartModule.countCart();
-        document.querySelector('.checkout-top-count').textContent = `${cartQuantity} Items`;
     }
 
 function updateProductCount(inputElement, productId) {
