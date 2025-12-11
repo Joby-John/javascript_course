@@ -70,11 +70,9 @@ export function renderOrderSummmary(){
             cartContainer.appendChild(clone);
 
         }
-
-        updateCartCountTop();
-
     });
-
+    
+    updateCartCountTop();
     //everytime order summary updates payment summary also updates
     renderPaymentSummary();
 }
