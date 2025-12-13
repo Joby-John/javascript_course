@@ -20,7 +20,7 @@ describe('Test Suite : renderOrderSummary', () => {
     });
 
     // ✨ NEW: Clean up the HTML after the test finishes
-    afterAll(() => {
+    afterEach(() => {
         document.querySelector('.js-test-container').innerHTML = '';
     });
 
