@@ -7,16 +7,14 @@ import { renderPaymentSummary } from './paymentSummary.js';
 import {updateCartCountTop} from './checkoutHeader.js';
 
 
-//initializes cart 
-cartModule.initCart();
-
-const cartContainer = document.querySelector('.js-order-summary');
-const template = document.querySelector('#cart-item-template');
-
 
 
 
 export function renderOrderSummmary(){
+    
+    const template = document.querySelector('#cart-item-template');
+    const cartContainer = document.querySelector('.js-order-summary');
+
     cartContainer.innerHTML = '';
     cartModule.cart.forEach((cartItem) => {
         const productId = cartItem.productId;
@@ -32,10 +30,15 @@ export function renderOrderSummmary(){
             clone.querySelector('.js-product-image').src = matchingProduct.image;
             clone.querySelector('.js-product-name').innerHTML = matchingProduct.name;
             clone.querySelector('.js-product-price').innerHTML = `$${moneyUtils.formatCurrency(matchingProduct.priceCents)}`;
-            clone.querySelector('.js-quantity-label').innerHTML = quantity;
+            
+            const quantityLabel = clone.querySelector('.js-quantity-label');
+            quantityLabel.innerHTML = quantity;
+            quantityLabel.dataset.productId = matchingProduct.id;
+
             clone.querySelector('.js-new-quantity-input').value = quantity;
 
             const inputQuantityElement = clone.querySelector('.js-new-quantity-input');
+            inputQuantityElement.dataset.productId = matchingProduct.id;
             inputQuantityElement.addEventListener('keydown', (event) => {
                 if (event.key === 'Enter') {
                     updateProductCount(inputQuantityElement, matchingProduct.id);
@@ -44,11 +47,12 @@ export function renderOrderSummmary(){
 
             const updateLink = clone.querySelector('.js-update-quantity-link');
             updateLink.addEventListener('click', () => {
-                const container = updateLink.closest('.js-cart-item');
+                const container = updateLink.closest('.js-cart-item-container');
                 container.classList.add('is-editing-quantity');
             });
 
             const saveLink = clone.querySelector('.js-save-quantity-link');
+            saveLink.dataset.productId = matchingProduct.id;
             saveLink.addEventListener('click', () => {
                 updateProductCount(inputQuantityElement, matchingProduct.id, cartItem);
                 
@@ -96,7 +100,7 @@ function addClickEventToDelete(deleteLinks) {
     }
 
 function updateProductCount(inputElement, productId) {
-        const container = inputElement.closest('.js-cart-item');
+        const container = inputElement.closest('.js-cart-item-container');
         container.classList.remove('is-editing-quantity');
 
         let value = inputElement.value.trim();
@@ -176,7 +180,7 @@ function updateProductCount(inputElement, productId) {
                 const input = option.querySelector('.js-delivery-option-input');
                 input.checked = true;
                 
-                parentContainer.closest('.js-cart-item').querySelector('.js-delivery-date').innerHTML = dateString; 
+                parentContainer.closest('.js-cart-item-container').querySelector('.js-delivery-date').innerHTML = dateString; 
             }
 
             //radio clicks

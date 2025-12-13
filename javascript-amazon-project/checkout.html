@@ -21,6 +21,65 @@
 </head>
 
 <body>
+  <template id="cart-item-template">
+          
+    <div class="js-cart-item-container cart-item-container" data-cart-item-id=""
+      data-testid="cart-item-container-9977c72a-166f-a12b-cac7-2609e3652a90">
+
+      <div class="delivery-date">
+        Delivery date:
+        <span class="js-delivery-date">Wednesday, December 17</span>
+      </div>
+
+      <div class="cart-item-details-grid">
+        <img class="product-image js-product-image" src="">
+
+        <div class="cart-item-details">
+          <div class="product-name js-product-name">
+            
+          </div>
+
+          <div class="product-price js-product-price">
+
+          </div>
+
+
+
+          <div class="js-quantity-container product-quantity" data-testid="quantity-container">
+            Quantity: <span class="js-quantity-label quantity-label" data-testid="quantity-label">
+              
+            </span>
+
+            <input class="js-new-quantity-input new-quantity-input" type="number" value=""
+              data-testid="new-quantity-input">
+
+            <span class="js-update-quantity-link update-quantity-link link-primary"
+              data-testid="update-quantity-link">
+              Update
+            </span>
+
+            <span class="js-save-quantity-link save-quantity-link link-primary" data-testid="save-quantity-link">
+              Save
+            </span>
+
+            <span class="js-delete-quantity-link delete-quantity-link link-primary"
+              data-testid="delete-quantity-link">
+              Delete
+            </span>
+          </div>
+        </div>
+
+        <div class="delivery-options js-delivery-options">
+          <div class="delivery-options-title">
+            Choose a delivery option:
+          </div>
+            <!-- Generated in checkout.js -->
+        </div>
+      </div>
+    </div>
+  </template>
+
+        
   <div class="checkout-header">
     <div class="header-content">
       <div class="checkout-header-left-section">
@@ -44,64 +103,10 @@
     <div class="page-title">Review your order</div>
 
     <div class="checkout-grid">
+
+      
       <div class="order-summary js-order-summary">
-        <template id="cart-item-template">
-          
-          <div class="js-cart-item cart-item-container" data-cart-item-id=""
-            data-testid="cart-item-container-9977c72a-166f-a12b-cac7-2609e3652a90">
-
-            <div class="delivery-date">
-              Delivery date:
-              <span class="js-delivery-date">Wednesday, December 17</span>
-            </div>
-
-            <div class="cart-item-details-grid">
-              <img class="product-image js-product-image" src="">
-
-              <div class="cart-item-details">
-                <div class="product-name js-product-name">
-                  
-                </div>
-
-                <div class="product-price js-product-price">
-  
-                </div>
-
-
-
-                <div class="js-quantity-container product-quantity" data-testid="quantity-container">
-                  Quantity: <span class="js-quantity-label quantity-label" data-testid="quantity-label">
-                    
-                  </span>
-
-                  <input class="js-new-quantity-input new-quantity-input" type="number" value=""
-                    data-testid="new-quantity-input">
-
-                  <span class="js-update-quantity-link update-quantity-link link-primary"
-                    data-testid="update-quantity-link">
-                    Update
-                  </span>
-
-                  <span class="js-save-quantity-link save-quantity-link link-primary" data-testid="save-quantity-link">
-                    Save
-                  </span>
-
-                  <span class="js-delete-quantity-link delete-quantity-link link-primary"
-                    data-testid="delete-quantity-link">
-                    Delete
-                  </span>
-                </div>
-              </div>
-
-              <div class="delivery-options js-delivery-options">
-                <div class="delivery-options-title">
-                  Choose a delivery option:
-                </div>
-                  <!-- Generated in checkout.js -->
-              </div>
-            </div>
-          </div>
-        </template>
+        <!-- Template defined at start of body -->
       </div>
 
       <div class="js-payment-summary payment-summary">
