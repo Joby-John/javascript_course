@@ -7,6 +7,9 @@ import { renderPaymentSummary } from './paymentSummary.js';
 import {updateCartCountTop} from './checkoutHeader.js';
 
 
+//initializes cart 
+cartModule.initCart();
+
 const cartContainer = document.querySelector('.js-order-summary');
 const template = document.querySelector('#cart-item-template');
 

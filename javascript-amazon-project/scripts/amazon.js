@@ -2,6 +2,8 @@ import * as cartModule from '../data/cart.js';
 import {products as productsList} from '../data/products.js';
 import * as moneyUtils from './utils/money.js';
 
+//initializes cart
+cartModule.initCart();
 
 document.addEventListener('DOMContentLoaded', () => {
 

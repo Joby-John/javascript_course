@@ -1,7 +1,10 @@
-import {cart} from '../../data/cart.js';
+import {cart, initCart} from '../../data/cart.js';
 import {getDeliveryOption} from '../../data/delivery-options.js';
 import {findMatchingProduct} from '../../data/products.js';
 import {formatCurrency} from '../utils/money.js';
+
+//initializes cart
+initCart();
 
 
 export function renderPaymentSummary(){
