@@ -1,36 +1,40 @@
+import { products } from "./products.js";
 
 export let cart = [];
+export function initCart(){
+    loadFromStorage();
+}
 
 export function loadFromStorage(){
     cart = JSON.parse(localStorage.getItem('cart')) || [];
 }
 
-export function initCart(){
-    loadFromStorage();
-}
+
 
 export function addToCart(productId){
-        let matchingItem;
+        if(products.some(product => product.id === productId)){
+            let matchingItem;
 
-        cart.forEach((cartItem) =>{
-            if(cartItem.productId === productId){
-                matchingItem = cartItem;
+            cart.forEach((cartItem) =>{
+                if(cartItem.productId === productId){
+                    matchingItem = cartItem;
+                }
+
+            });
+
+            if(matchingItem){
+                matchingItem.quantity += 1;
+            }else{
+                cart.push(
+                {
+                    productId: productId,
+                    quantity:1,
+                    deliveryOptionId :'1'
+                });
             }
 
-        });
-
-        if(matchingItem){
-            matchingItem.quantity += 1;
-        }else{
-            cart.push(
-            {
-                productId: productId,
-                quantity:1,
-                deliveryOptionId :'1'
-            });
+            saveToStorage();
         }
-
-        saveToStorage();
     }
 
 export function addToCartAnimation(button){
