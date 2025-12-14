@@ -27,7 +27,8 @@ document.addEventListener('DOMContentLoaded', () => {
             clone.querySelector('.product-price').textContent = product.getPriceInUSD();
 
             clone.querySelector('.js-add-to-cart').dataset.productId= product.id; 
-
+            const sizeChartLinkDiv = clone.querySelector('.js-clothing-size');
+            sizeChartLinkDiv.innerHTML = product.extraInfoHTML();
 
             prodGrid.appendChild(clone);
         });

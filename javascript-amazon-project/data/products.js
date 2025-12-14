@@ -37,15 +37,34 @@ class Product{
           4.5: 'images/ratings/rating-45.png',
           5: 'images/ratings/rating-50.png'
       };
-
       return starImgs[Math.round(this.rating.stars * 2) / 2];
   }
+
+  extraInfoHTML(){
+        return '';
+      }
 
   getPriceInUSD(){
     const priceUSD = moneyUtils.formatCurrency(this.priceCents);
     return `$${priceUSD}`;
   }
 }
+
+class Clothing extends Product{
+  sizeChartLink;
+
+  constructor(productDetails){
+    super(productDetails);
+    this.sizeChartLink = productDetails.sizeChartLink;
+  }
+
+  extraInfoHTML(){
+    return `
+      <a href="${this.sizeChartLink}" target="_blank">Size Chart</a>
+    `;
+  }
+}
+
 
 
 export const products = [
@@ -707,7 +726,10 @@ export const products = [
       "mens"
     ]
   }
-].map( productDetails => new Product(productDetails));
+].map( (productDetails) => {
+  if(productDetails.type === 'clothing'){
+    return new Clothing(productDetails);
+  }
+  return new Product(productDetails)
 
-
-
+});
