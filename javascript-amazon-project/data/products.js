@@ -1,9 +1,50 @@
+import * as moneyUtils from '../scripts/utils/money.js';
 
 export function findMatchingProduct(productId){
   const matchedProduct = products.find(product =>
     productId === product.id);
 
   return matchedProduct; 
+}
+
+
+class Product{
+  id;
+  image;
+  name;
+  rating;
+  priceCents;
+
+  constructor(productDetails){
+    this.id = productDetails.id;
+    this.image = productDetails.image;
+    this.name = productDetails.name;
+    this.rating = productDetails.rating;
+    this.priceCents = productDetails.priceCents;
+  };
+
+  getStarsUrl(){
+    const starImgs = {
+          0: 'images/ratings/rating-0.png',
+          0.5: 'images/ratings/rating-05.png',
+          1: 'images/ratings/rating-10.png',
+          1.5: 'images/ratings/rating-15.png',
+          2: 'images/ratings/rating-20.png',
+          2.5: 'images/ratings/rating-25.png',
+          3: 'images/ratings/rating-30.png',
+          3.5: 'images/ratings/rating-35.png',
+          4: 'images/ratings/rating-40.png',
+          4.5: 'images/ratings/rating-45.png',
+          5: 'images/ratings/rating-50.png'
+      };
+
+      return starImgs[Math.round(this.rating.stars * 2) / 2];
+  }
+
+  getPriceInUSD(){
+    const priceUSD = moneyUtils.formatCurrency(this.priceCents);
+    return `$${priceUSD}`;
+  }
 }
 
 
@@ -666,4 +707,7 @@ export const products = [
       "mens"
     ]
   }
-];
+].map( productDetails => new Product(productDetails));
+
+
+

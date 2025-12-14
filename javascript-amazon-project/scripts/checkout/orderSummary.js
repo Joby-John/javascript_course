@@ -29,7 +29,7 @@ export function renderOrderSummmary(){
             const clone = template.content.cloneNode(true);
             clone.querySelector('.js-product-image').src = matchingProduct.image;
             clone.querySelector('.js-product-name').innerHTML = matchingProduct.name;
-            clone.querySelector('.js-product-price').innerHTML = `$${moneyUtils.formatCurrency(matchingProduct.priceCents)}`;
+            clone.querySelector('.js-product-price').innerHTML = matchingProduct.getPriceInUSD();
             
             const quantityLabel = clone.querySelector('.js-quantity-label');
             quantityLabel.innerHTML = quantity;
