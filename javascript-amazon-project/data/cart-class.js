@@ -2,25 +2,26 @@ import { products } from "./products.js";
 
 
 class Cart{
+
     cartItems = [];
-    localStorageKey;
+    #localStorageKey;
 
     //constructor
     constructor(localStorageKey){
-        this.localStorageKey = localStorageKey;
+        this.#localStorageKey = localStorageKey;
         this.initCart();
     }
 
-    loadFromStorage(){
-        this.cartItems = JSON.parse(localStorage.getItem(this.localStorageKey)) || [];
+    #loadFromStorage(){
+        this.cartItems = JSON.parse(localStorage.getItem(this.#localStorageKey)) || [];
     };
     
     saveToStorage(){
-        localStorage.setItem(this.localStorageKey, JSON.stringify(this.cartItems));
+        localStorage.setItem(this.#localStorageKey, JSON.stringify(this.cartItems));
     };
 
     initCart(){
-        this.loadFromStorage();
+        this.#loadFromStorage();
     };
     
     addToCart(productId){
