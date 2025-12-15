@@ -118,14 +118,14 @@ class Cart{
 };
 
 
-const cart = new Cart('ind-cart');
-const businessCart = new Cart('bus-cart');
+// const cart = new Cart('ind-cart');
+// const businessCart = new Cart('bus-cart');
 
-cart.addToCart('901eb2ca-386d-432e-82f0-6fb1ee7bf969');
-businessCart.addToCart('04701903-bc79-49c6-bc11-1af7e3651358');
-businessCart.addToCart('901eb2ca-386d-432e-82f0-6fb1ee7bf969');
+// cart.addToCart('901eb2ca-386d-432e-82f0-6fb1ee7bf969');
+// businessCart.addToCart('04701903-bc79-49c6-bc11-1af7e3651358');
+// businessCart.addToCart('901eb2ca-386d-432e-82f0-6fb1ee7bf969');
 
-console.log(cart);
-console.log(businessCart);
+// console.log(cart);
+// console.log(businessCart);
 
-console.log(businessCart instanceof Cart);
+// console.log(businessCart instanceof Cart);
