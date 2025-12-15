@@ -2,11 +2,10 @@ import { addToCart, cart, initCart } from "../../data/cart.js";
 import { loadProducts } from "../../data/products.js";
 
 describe('Test Suite : addToCart', ()=>{
-    beforeAll((done)=>{
-        loadProducts(()=>{
-            done();
-        })
-    });
+    beforeAll( async ()=>{
+        await loadProducts();
+    })
+    
     beforeEach(()=>{
             spyOn(localStorage, 'setItem');
         });

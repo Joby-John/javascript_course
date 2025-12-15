@@ -1,17 +1,20 @@
 import * as cartModule from '../data/cart.js';
 import {products as productsList, loadProducts} from '../data/products.js';
 
-addEventListener('DOMContentLoaded', ()=>{
+
+addEventListener('DOMContentLoaded', async()=>{
     // Wait for products to load, then render
-    loadProducts(() => {
+    
+    
         // Initialize cart
         cartModule.initCart();
 
         // Generate product grid
+        await loadProducts();
         generateProducts();
         addTocartButtonEvents();
         updateCartQuantity();
-    });
+    
 });
 
 

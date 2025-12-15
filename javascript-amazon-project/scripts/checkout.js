@@ -5,8 +5,14 @@ import { loadProducts } from '../data/products.js';
 //import '../data/backend-practice.js';
 
 
-loadProducts(()=>{
+
+renderCheckoutPage();
+
+async function renderCheckoutPage(){
+    await loadProducts();
     renderOrderSummmary();
     renderPaymentSummary();
-});
+}
+
+
 

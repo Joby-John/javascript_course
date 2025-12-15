@@ -109,31 +109,49 @@ const obj3 = {
 obj3.method();
 */
 
+/*
+//this waits for all the promises in the array to complete before going to then
+Promise.all([
+  new Promise((resolve)=>{
+    loadProducts(()=>{
+      resolve('val1');
+    })
+  }),
+  new Promise((resolve)=>{
+    loadCart(()=>{
+      resolve('val2');
+    })
+  })
+]).then( (valuesFromAboveResolves)=>{
+    endgame();
+    InfinityWar();
+  }
+);
+*/
+
 export let products = [];
 
-export function loadProducts(fun){
-  const xmr = new XMLHttpRequest();
+//important that to be async to either return promise or be async 
+export function loadProducts(){
+  return new Promise((resolve) =>{
+    const xmr = new XMLHttpRequest();
   
-  xmr.addEventListener('load', ()=>{
-    products = JSON.parse(xmr.response).map( (productDetails) => {
-                if(productDetails.type === 'clothing'){
-                  return new Clothing(productDetails);
-                }
-                return new Product(productDetails)
+    xmr.addEventListener('load', ()=>{
+      products = JSON.parse(xmr.response).map( (productDetails) => {
+                  if(productDetails.type === 'clothing'){
+                    return new Clothing(productDetails);
+                  }
+                  return new Product(productDetails)
 
-              });
-    
-    console.log('load success');
+                });
+      resolve();
+    });
 
-    fun();
-    
+    xmr.open('GET', 'https://supersimplebackend.dev/products');
+    xmr.send();
   });
 
-  xmr.open('GET', 'https://supersimplebackend.dev/products');
-  xmr.send();
-
 }
-
 
 
 /*

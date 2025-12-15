@@ -9,10 +9,8 @@ describe('Test Suite : renderOrderSummary', () => {
     const productId1 = 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6';
     const productId2 = '3fdfe8d6-9a15-4979-b459-585b0d0545b9';
     
-    beforeAll((done)=>{
-        loadProducts(()=>{
-            done();
-        });
+    beforeAll(async ()=>{
+        await loadProducts();
     });
 
     beforeEach(() => {
