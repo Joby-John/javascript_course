@@ -1,11 +1,11 @@
 import { addToCart, cart, initCart } from "../../data/cart.js";
-import { loadProducts } from "../../data/products.js";
+import { loadProductsFetch } from "../../data/products.js";
 
 describe('Test Suite : addToCart', ()=>{
     beforeAll( async ()=>{
-        await loadProducts();
+        await loadProductsFetch();
     })
-    
+
     beforeEach(()=>{
             spyOn(localStorage, 'setItem');
         });

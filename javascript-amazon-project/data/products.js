@@ -131,7 +131,33 @@ Promise.all([
 
 export let products = [];
 
+/*
+function loadProductsFetch(){
+  fetch('https://supersimplebackend.dev/products').then((response)=>{
+      return response.json();
+  }).then((productData)=>{
+      console.log(productData);
+  })
+}
+loadProductsFetch();
+*/
+
+export async function loadProductsFetch(){
+  const response = await fetch('https://supersimplebackend.dev/products');
+  const productsData = await response.json();
+  products = productsData.map( (productDetails) => {
+                  if(productDetails.type === 'clothing'){
+                    return new Clothing(productDetails);
+                  }
+                  return new Product(productDetails)
+
+                });
+}
+
+
+
 //important that to be async to either return promise or be async 
+/*
 export function loadProducts(){
   return new Promise((resolve) =>{
     const xmr = new XMLHttpRequest();
@@ -152,6 +178,7 @@ export function loadProducts(){
   });
 
 }
+*/
 
 
 /*

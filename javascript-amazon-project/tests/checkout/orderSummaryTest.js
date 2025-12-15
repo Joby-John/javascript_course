@@ -1,7 +1,7 @@
 import { setupOrderSummaryDOM } from "./setUpTestDOMCheckout.js";
 import { renderOrderSummmary } from "../../scripts/checkout/orderSummary.js";
 import { initCart, cart } from "../../data/cart.js";
-import { loadProducts } from "../../data/products.js";
+import { loadProductsFetch } from "../../data/products.js";
 
 setupOrderSummaryDOM();
 
@@ -10,7 +10,7 @@ describe('Test Suite : renderOrderSummary', () => {
     const productId2 = '3fdfe8d6-9a15-4979-b459-585b0d0545b9';
     
     beforeAll(async ()=>{
-        await loadProducts();
+        await loadProductsFetch();
     });
 
     beforeEach(() => {

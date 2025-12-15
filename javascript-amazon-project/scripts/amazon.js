@@ -1,5 +1,5 @@
 import * as cartModule from '../data/cart.js';
-import {products as productsList, loadProducts} from '../data/products.js';
+import {products as productsList, loadProductsFetch} from '../data/products.js';
 
 
 addEventListener('DOMContentLoaded', async()=>{
@@ -10,7 +10,7 @@ addEventListener('DOMContentLoaded', async()=>{
         cartModule.initCart();
 
         // Generate product grid
-        await loadProducts();
+        await loadProductsFetch();
         generateProducts();
         addTocartButtonEvents();
         updateCartQuantity();
