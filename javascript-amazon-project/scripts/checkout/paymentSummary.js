@@ -2,6 +2,7 @@ import {cart, initCart} from '../../data/cart.js';
 import {getDeliveryOption} from '../../data/delivery-options.js';
 import {findMatchingProduct} from '../../data/products.js';
 import {formatCurrency} from '../utils/money.js';
+import { addOrder } from '../../data/orders.js';
 
 //initializes cart
 initCart();
@@ -45,10 +46,41 @@ export function renderPaymentSummary(){
     parentDiv.querySelector('.js-tax-amount').innerHTML = `$${extraTax}`;
     parentDiv.querySelector('.js-order-total').innerHTML = `$${orderTotal}`;
 
+    
+
     if(itemCount === 0){
         
         parentDiv.querySelector('.js-place-order-button').disabled = true;
         parentDiv.querySelector('.js-place-order-button').classList.add('place-order-button-disabled');
     }
 
+}
+
+export function setUpPlaceOrderButton(){
+    const button = document.querySelector('.js-place-order-button');
+    
+    button.onclick = async ()=>{
+        try{
+            const response = await fetch('https://supersimplebackend.dev/orders', {
+                method:'post',
+                headers: {
+                    'content-Type' : 'application/json'
+                },
+                body: JSON.stringify({
+                    cart: cart
+                })
+            });
+
+            const order = await response.json();
+
+            addOrder(order);
+        }catch(error){
+            console.error(`Unexpected Error: ${error}`);
+
+        }
+
+        window.location.href = 'orders.html';
+        
+
+    };
 }
