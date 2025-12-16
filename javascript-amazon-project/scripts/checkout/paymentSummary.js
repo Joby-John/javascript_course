@@ -1,4 +1,4 @@
-import {cart, initCart} from '../../data/cart.js';
+import {cart, initCart, resetCart} from '../../data/cart.js';
 import {getDeliveryOption} from '../../data/delivery-options.js';
 import {findMatchingProduct} from '../../data/products.js';
 import {formatCurrency} from '../utils/money.js';
@@ -6,7 +6,7 @@ import { addOrder } from '../../data/orders.js';
 
 //initializes cart
 initCart();
-
+console.log(cart.length);
 
 export function renderPaymentSummary(){
     
@@ -78,7 +78,7 @@ export function setUpPlaceOrderButton(){
             console.error(`Unexpected Error: ${error}`);
 
         }
-
+        resetCart();
         window.location.href = 'orders.html';
         
 

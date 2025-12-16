@@ -1,6 +1,11 @@
 import { products } from "./products.js";
 
 export let cart = [];
+
+export function resetCart(){
+    cart = [];
+    saveToStorage();
+}
 export function initCart(){
     loadFromStorage();
 }

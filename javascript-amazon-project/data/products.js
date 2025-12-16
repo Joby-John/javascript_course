@@ -158,6 +158,10 @@ export async function loadProductsFetch(){
                 });
 }
 
+export async function initProducts(){
+  await loadProductsFetch();
+}
+
 
 
 //important that to be async to either return promise or be async 
