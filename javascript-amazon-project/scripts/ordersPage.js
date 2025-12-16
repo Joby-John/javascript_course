@@ -4,7 +4,7 @@ import dayjs from 'https://unpkg.com/supersimpledev@8.5.0/dayjs/esm/index.js';
 import * as moneyUtils from './utils/money.js';
 import * as productModule from '../data/products.js';
 
-
+console.log(orders);
 
 // console.log(orders);
 addEventListener('DOMContentLoaded', async()=>{
@@ -38,6 +38,8 @@ addEventListener('DOMContentLoaded', async()=>{
                 cartModule.addToCart(orderProduct.productId);
                 updateCartQuantity()
             });
+
+            productClone.querySelector('.js-track-link').href = `tracking.html?orderId=${order.id}&productId=${orderProduct.productId}`;
 
             orderDetailsGrid.appendChild(productClone);
 
