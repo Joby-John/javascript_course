@@ -129,7 +129,7 @@ Promise.all([
 );
 */
 
-export let products = [];
+
 
 /*
 function loadProductsFetch(){
@@ -142,8 +142,12 @@ function loadProductsFetch(){
 loadProductsFetch();
 */
 
+export let products = [];
+
 export async function loadProductsFetch(){
-  const response = await fetch('https://supersimplebackend.dev/products');
+  const response = await fetch('https://supersimplebackend.dev/products').catch(()=>{
+    console.log('Error happend during retrieving products data');
+  });
   const productsData = await response.json();
   products = productsData.map( (productDetails) => {
                   if(productDetails.type === 'clothing'){

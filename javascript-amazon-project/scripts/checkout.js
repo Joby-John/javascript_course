@@ -9,9 +9,23 @@ import { loadProductsFetch } from '../data/products.js';
 renderCheckoutPage();
 
 async function renderCheckoutPage(){
-    await loadProductsFetch();
-    renderOrderSummmary();
-    renderPaymentSummary();
+    try{
+        await loadProductsFetch(); 
+        renderOrderSummmary();
+        renderPaymentSummary();
+    }catch(error){
+        renderErrorPage();
+        console.error('Checkout page failed to load:', error);
+    } 
+}
+
+function renderErrorPage(){
+    document.querySelector('body').innerHTML =  `
+      <main class="error-page">
+        <h2>Something went wrong</h2>
+        <p>Please try again later.</p>
+      </main>
+    `;
 }
 
 

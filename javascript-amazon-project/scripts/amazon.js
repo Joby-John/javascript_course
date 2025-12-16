@@ -4,18 +4,36 @@ import {products as productsList, loadProductsFetch} from '../data/products.js';
 
 addEventListener('DOMContentLoaded', async()=>{
     // Wait for products to load, then render
-    
-    
-        // Initialize cart
-        cartModule.initCart();
-
         // Generate product grid
-        await loadProductsFetch();
-        generateProducts();
-        addTocartButtonEvents();
-        updateCartQuantity();
+        try{
+            // Initialize cart
+            cartModule.initCart();
+            //get products list from remote backend
+            await loadProductsFetch();
+
+            renderPage();
+        }catch(error){
+            showErrorPage();
+            console.error('Checkout page failed to load:', error);
+        }
+
+        
     
 });
+
+function renderPage(){
+    generateProducts();
+    addTocartButtonEvents();
+    updateCartQuantity();
+}
+function showErrorPage(){
+    document.querySelector('body').innerHTML = document.querySelector('body').innerHTML =  `
+      <main class="error-page">
+        <h2>Something went wrong</h2>
+        <p>Please try again later.</p>
+      </main>
+    `;
+}
 
 
 function generateProducts() {
